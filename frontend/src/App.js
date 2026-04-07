@@ -13,7 +13,6 @@ import Checkout from "./Checkout";
 import Bookings from "./Bookings";
 import PrivateRoute from "./PrivateRoute";
 import Admin from "./Admin";
-import { AuthContext } from "./AuthContext";
 import AdminSupport from "./AdminSupport";
 import Payment from "./Payment";
 function App() {
