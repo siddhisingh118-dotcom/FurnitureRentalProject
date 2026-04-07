@@ -22,7 +22,6 @@ function App() {
   const [selectedCategory, setSelectedCategory] = useState("all");
   const [search, setSearch] = useState("");
   const { addToCart } = useContext(CartContext);
-  const { cart } = useContext(CartContext);
   const { user } = useContext(AuthContext);
   const [likedItems, setLikedItems] = useState({});
 
@@ -33,36 +32,7 @@ function App() {
       .catch(err => console.log(err));
   }, []);
 
-const rentProduct = (productId) => {
-  if (!user) {
-    return alert("Please login first to book a product.");
-  }
-
-  const bookingData = {
-    userName: user.name,
-    userId: user._id,
-    productId: productId,
-    rentalDuration: 3
-  };
-
-  axios.post("http://localhost:5000/api/bookings/add", bookingData)
-    .then(() => {
-      alert("Furniture booked successfully!");
-    })
-    .catch(err => console.log(err));
-};
-
-  const cardStyle = {
-    background: "white",
-    padding: "20px",
-    borderRadius: "10px",
-    textAlign: "center",
-    boxShadow: "0 4px 10px rgba(0,0,0,0.1)",
-    cursor: "pointer",
-    transition: "0.3s"
-  };
-
- const filteredProducts = products
+const filteredProducts = products
   .filter(product =>
     selectedCategory === "all" || product.category === selectedCategory
   )
