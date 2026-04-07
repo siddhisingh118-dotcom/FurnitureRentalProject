@@ -6,7 +6,7 @@ import { useNavigate } from "react-router-dom";
 
 function Checkout() {
 
-  const { cart, setCart } = useContext(CartContext);
+  const { cart } = useContext(CartContext);
   const { user } = useContext(AuthContext);
   const navigate = useNavigate();
 
