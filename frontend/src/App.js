@@ -22,7 +22,6 @@ function App() {
   const [selectedCategory, setSelectedCategory] = useState("all");
   const [search, setSearch] = useState("");
   const { addToCart } = useContext(CartContext);
-  const [, setUser] = useState(null);
   const [likedItems, setLikedItems] = useState({});
 
 
