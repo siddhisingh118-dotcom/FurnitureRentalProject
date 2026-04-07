@@ -217,7 +217,7 @@ const getStatusStyle = (status) => {
 
     </div>
 
-    {/* ⭐ ANALYTICS CHART */}
+    {/*  ANALYTICS CHART */}
     <AdminAnalytics />
 
   </div>

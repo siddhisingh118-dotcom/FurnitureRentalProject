@@ -25,7 +25,9 @@ app.use("/api/support", supportRoutes);
 app.use("/api/orders", orderRoutes);
 
 // MongoDB connection
-mongoose.connect("mongodb://127.0.0.1:27017/furnitureRental")
+const uri = process.env.MONGO_URI;
+
+mongoose.connect(uri)
   .then(() => console.log("MongoDB Connected"))
   .catch(err => console.log(err));
 
