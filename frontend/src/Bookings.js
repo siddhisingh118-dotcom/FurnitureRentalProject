@@ -25,15 +25,10 @@ function Bookings() {
       .catch(err => console.log(err));
   };
 
+// eslint-disable-next-line react-hooks/exhaustive-deps
 useEffect(() => {
-
-  const load = async () => {
-    fetchBookings();
-    fetchSupportRequests();
-  };
-
-  load();
-
+  fetchBookings();
+  fetchSupportRequests();
 }, []);
 
   const updateDuration = (id, months) => {

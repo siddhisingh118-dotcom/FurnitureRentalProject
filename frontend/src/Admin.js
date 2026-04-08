@@ -81,16 +81,11 @@ export default function Admin() {
     fetchBookings();
   };
 
+// eslint-disable-next-line react-hooks/exhaustive-deps
 useEffect(() => {
-
-  const loadData = async () => {
-    await fetchStats();
-    await fetchProducts();
-    await fetchBookings();
-  };
-
-  loadData();
-
+  fetchStats();
+  fetchProducts();
+  fetchBookings();
 }, []);
 
   // ================= UI STYLES =================

@@ -17,14 +17,9 @@ function AdminSupport() {
     }
   };
 
+// eslint-disable-next-line react-hooks/exhaustive-deps
 useEffect(() => {
-
-  const load = async () => {
-    await fetchRequests();
-  };
-
-  load();
-
+  fetchRequests();
 }, []);
 
   const updateStatus = async (id, status) => {

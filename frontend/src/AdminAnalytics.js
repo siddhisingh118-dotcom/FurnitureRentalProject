@@ -113,14 +113,9 @@ function AdminAnalytics() {
 
   };
 
+// eslint-disable-next-line react-hooks/exhaustive-deps
 useEffect(() => {
-
-  const load = async () => {
-    await fetchBookings();
-  };
-
-  load();
-
+  fetchBookings();
 }, []);
 
   const cardStyle = {
