@@ -81,12 +81,17 @@ export default function Admin() {
     fetchBookings();
   };
 
-  useEffect(() => {
-    fetchStats();
-    fetchProducts();
-    fetchBookings();
-    // eslint-disable-next-line
-  }, []);
+useEffect(() => {
+
+  const loadData = async () => {
+    await fetchStats();
+    await fetchProducts();
+    await fetchBookings();
+  };
+
+  loadData();
+
+}, []);
 
   // ================= UI STYLES =================
 

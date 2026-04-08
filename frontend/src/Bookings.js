@@ -25,11 +25,16 @@ function Bookings() {
       .catch(err => console.log(err));
   };
 
-  useEffect(() => {
+useEffect(() => {
+
+  const load = async () => {
     fetchBookings();
     fetchSupportRequests();
-    // eslint-disable-next-line
-  }, []);
+  };
+
+  load();
+
+}, []);
 
   const updateDuration = (id, months) => {
     axios.put(`${backendURL}/api/bookings/update/${id}`, {

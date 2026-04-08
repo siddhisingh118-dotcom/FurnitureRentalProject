@@ -18,8 +18,13 @@ function AdminSupport() {
   };
 
 useEffect(() => {
-  fetchRequests();
-  // eslint-disable-next-line
+
+  const load = async () => {
+    await fetchRequests();
+  };
+
+  load();
+
 }, []);
 
   const updateStatus = async (id, status) => {

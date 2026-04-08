@@ -114,8 +114,13 @@ function AdminAnalytics() {
   };
 
 useEffect(() => {
-  fetchBookings();
-  // eslint-disable-next-line
+
+  const load = async () => {
+    await fetchBookings();
+  };
+
+  load();
+
 }, []);
 
   const cardStyle = {
