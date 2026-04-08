@@ -115,7 +115,8 @@ function AdminAnalytics() {
 
 useEffect(() => {
   fetchBookings();
-}, [fetchBookings]);
+  // eslint-disable-next-line
+}, []);
 
   const cardStyle = {
     width: "48%",

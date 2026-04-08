@@ -4,45 +4,35 @@ import AdminSupport from "./AdminSupport";
 import AdminAnalytics from "./AdminAnalytics";
 
 export default function Admin() {
-  const backendURL = process.env.REACT_APP_BACKEND_URL; // <-  Render backend URL
+  const backendURL = process.env.REACT_APP_BACKEND_URL;
 
   const [tab, setTab] = useState("dashboard");
 
-  // ===== Dashboard Stats =====
   const [stats, setStats] = useState({});
-
-  // ===== Products =====
   const [products, setProducts] = useState([]);
   const [name, setName] = useState("");
   const [category, setCategory] = useState("Furniture");
   const [rentPrice, setRentPrice] = useState("");
   const [securityDeposit, setSecurityDeposit] = useState("");
   const [image, setImage] = useState("");
-
-  // ===== Bookings =====
   const [bookings, setBookings] = useState([]);
 
-  // ================= API CALLS =================
+  const fetchStats = async () => {
+    const res = await axios.get(`${backendURL}/api/admin/stats`);
+    setStats(res.data);
+  };
 
-const fetchStats = async () => {
-  const res = await axios.get(`${backendURL}/api/admin/stats`);
-  setStats(res.data);
-};
+  const fetchProducts = async () => {
+    const res = await axios.get(`${backendURL}/api/products`);
+    setProducts(res.data);
+  };
 
-const fetchProducts = async () => {
-  const res = await axios.get(`${backendURL}/api/products`);
-  setProducts(res.data);
-};
-
-const fetchBookings = async () => {
-  const res = await axios.get(`${backendURL}/api/admin/bookings`);
-  setBookings(res.data);
-};
-
-  // ================= PRODUCT FUNCTIONS =================
+  const fetchBookings = async () => {
+    const res = await axios.get(`${backendURL}/api/admin/bookings`);
+    setBookings(res.data);
+  };
 
   const addProduct = async () => {
-
     if (!name || !rentPrice || !securityDeposit || !image) {
       return alert("All fields required");
     }
@@ -72,10 +62,7 @@ const fetchBookings = async () => {
     fetchStats();
   };
 
-  // ================= BOOKING STATUS =================
-
   const updateBookingStatus = async (id, status) => {
-
     await axios.put(`${backendURL}/api/admin/bookings/${id}`, {
       bookingStatus: status
     });
@@ -85,19 +72,21 @@ const fetchBookings = async () => {
   };
 
   const approveReturn = async (id) => { 
-    await axios.put(`${backendURL}/api/bookings/approve-return/${id}`); fetchBookings(); 
-}; 
+    await axios.put(`${backendURL}/api/bookings/approve-return/${id}`);
+    fetchBookings(); 
+  }; 
+
   const completeBooking = async (id) => {
-     await axios.put(`${backendURL}/api/bookings/complete/${id}`); fetchBookings();
-    };
+    await axios.put(`${backendURL}/api/bookings/complete/${id}`);
+    fetchBookings();
+  };
 
-  // ================= LOAD DATA =================
-
- useEffect(() => {
-  fetchStats();
-  fetchProducts();
-  fetchBookings();
-}, [fetchStats, fetchProducts, fetchBookings]);
+  useEffect(() => {
+    fetchStats();
+    fetchProducts();
+    fetchBookings();
+    // eslint-disable-next-line
+  }, []);
 
   // ================= UI STYLES =================
 

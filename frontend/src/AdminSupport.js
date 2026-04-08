@@ -19,7 +19,8 @@ function AdminSupport() {
 
 useEffect(() => {
   fetchRequests();
-}, [fetchRequests]);
+  // eslint-disable-next-line
+}, []);
 
   const updateStatus = async (id, status) => {
     try {

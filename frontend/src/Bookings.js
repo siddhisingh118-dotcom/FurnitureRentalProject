@@ -8,7 +8,6 @@ function Bookings() {
   const [supportRequests, setSupportRequests] = useState([]);
 
   const fetchBookings = () => {
-
     axios.get(`${backendURL}/api/bookings`)
       .then(res => {
         setBookings(res.data);
@@ -16,26 +15,23 @@ function Bookings() {
       .catch(err => {
         console.log(err);
       });
-
   };
 
-useEffect(() => {
-  fetchBookings();
-  fetchSupportRequests();
-}, [fetchBookings, fetchSupportRequests]);
-
   const fetchSupportRequests = () => {
-
     axios.get(`${backendURL}/api/support`)
       .then(res => {
         setSupportRequests(res.data);
       })
       .catch(err => console.log(err));
-
   };
 
-  const updateDuration = (id, months) => {
+  useEffect(() => {
+    fetchBookings();
+    fetchSupportRequests();
+    // eslint-disable-next-line
+  }, []);
 
+  const updateDuration = (id, months) => {
     axios.put(`${backendURL}/api/bookings/update/${id}`, {
       rentalDuration: months
     })
@@ -43,14 +39,10 @@ useEffect(() => {
         fetchBookings();
       })
       .catch(err => console.log(err));
-
   };
 
-  //  NEW SUPPORT REQUEST FUNCTION
   const requestSupport = (booking) => {
-
     const message = prompt("Describe the issue:");
-
     if (!message) return;
 
     axios.post(`${backendURL}/api/support/add`, {
@@ -63,14 +55,10 @@ useEffect(() => {
         alert("Support request submitted!");
       })
       .catch(err => console.log(err));
-
   };
 
-  //  NEW: Schedule Pickup Function
   const schedulePickup = (booking) => {
-
-    const date = prompt("Enter Pickup Date (YYYY-MM-DD):");
-
+    const date = prompt("Enter Pickup Date (YYYY-MM-DD)");
     if (!date) return;
 
     axios.put(`${backendURL}/api/bookings/schedule-pickup/${booking._id}`, {
@@ -81,19 +69,16 @@ useEffect(() => {
         fetchBookings();
       })
       .catch(err => console.log(err));
-
   };
 
   const requestReturn = (booking) => {
-
-  axios.put(`${backendURL}/api/bookings/request-return/${booking._id}`)
-    .then(() => {
-      alert("Return requested!");
-      fetchBookings();
-    })
-    .catch(err => console.log(err));
-
-};
+    axios.put(`${backendURL}/api/bookings/request-return/${booking._id}`)
+      .then(() => {
+        alert("Return requested!");
+        fetchBookings();
+      })
+      .catch(err => console.log(err));
+  };
 
   return (
 
