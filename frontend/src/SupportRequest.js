@@ -2,15 +2,14 @@ import React, { useState } from "react";
 import axios from "axios";
 
 function SupportRequest({ booking }) {
-
+  const backendURL = process.env.REACT_APP_BACKEND_URL;
   const [issue, setIssue] = useState("");
 
   const submitRequest = async () => {
 
     try {
 
-      await axios.post("http://furniture-rental-project-dg9ur9tch.vercel.app/api/support/add", {
-
+      await axios.post(`${backendURL}/api/support/add`, {
         userId: booking.userId,
         userName: booking.userName,
 

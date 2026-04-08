@@ -2,13 +2,14 @@ import React, { useEffect, useState } from "react";
 import axios from "axios";
 
 function AdminSupport() {
+  const backendURL = process.env.REACT_APP_BACKEND_URL;
 
   const [requests, setRequests] = useState([]);
   const [replyText, setReplyText] = useState({});
 
   const fetchRequests = async () => {
     try {
-      const res = await axios.get("https://furniture-rental-project-dg9ur9tch.vercel.app/api/support");
+      const res = await axios.get(`${backendURL}/api/support`);
       setRequests(res.data || []);
     } catch (err) {
       console.error("Error fetching support requests:", err);
@@ -22,7 +23,7 @@ function AdminSupport() {
 
   const updateStatus = async (id, status) => {
     try {
-      await axios.put(`https://furniture-rental-project-dg9ur9tch.vercel.app/api/support/${id}`, {
+      await axios.put(`${backendURL}/api/support/${id}`, {
         requestStatus: status
       });
       fetchRequests();
@@ -35,7 +36,7 @@ function AdminSupport() {
   const sendReply = async (id) => {
     try {
 
-      await axios.put(`https://furniture-rental-project-dg9ur9tch.vercel.app/api/support/reply/${id}`, {
+      await axios.put(`${backendURL}/api/support/reply/${id}`, {
         adminReply: replyText[id]
       });
 

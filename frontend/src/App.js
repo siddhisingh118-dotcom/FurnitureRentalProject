@@ -16,7 +16,7 @@ import Admin from "./Admin";
 import AdminSupport from "./AdminSupport";
 import Payment from "./Payment";
 function App() {
-
+  const backendURL = process.env.REACT_APP_BACKEND_URL;
   const [products, setProducts] = useState([]);
   const [selectedCategory, setSelectedCategory] = useState("all");
   const [search, setSearch] = useState("");
@@ -25,7 +25,7 @@ function App() {
 
 
   useEffect(() => {
-    axios.get("https://furniture-rental-project-dg9ur9tch.vercel.app/api/products/")
+    axios.get(`${backendURL}/api/products/`)
       .then(res => setProducts(res.data))
       .catch(err => console.log(err));
   }, []);

@@ -2,12 +2,12 @@ import React, {useEffect, useState} from "react";
 import axios from "axios";
 
 function Dashboard(){
-
+ const backendURL = process.env.REACT_APP_BACKEND_URL;
  const [bookings, setBookings] = useState([]);
 
  useEffect(()=>{
 
-axios.get("https://furniture-rental-project-dg9ur9tch.vercel.app/api/bookings")
+axios.get(`${backendURL}/api/bookings`)
    .then(res=>{
      setBookings(res.data);
    });

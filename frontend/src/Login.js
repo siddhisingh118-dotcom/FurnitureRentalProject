@@ -4,7 +4,7 @@ import { Link, useNavigate } from "react-router-dom";
 import { AuthContext } from "./AuthContext";
 
 function Login() {
-
+  const backendURL = process.env.REACT_APP_BACKEND_URL;
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
 
@@ -18,7 +18,7 @@ function Login() {
     try {
 
       const res = await axios.post(
-        "http://furniture-rental-project-dg9ur9tch.vercel.app/api/auth/login",
+        `${backendURL}/api/auth/login`,
         {
           email,
           password

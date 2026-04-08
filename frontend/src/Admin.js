@@ -4,6 +4,7 @@ import AdminSupport from "./AdminSupport";
 import AdminAnalytics from "./AdminAnalytics";
 
 export default function Admin() {
+  const backendURL = process.env.REACT_APP_BACKEND_URL; // <-  Render backend URL
 
   const [tab, setTab] = useState("dashboard");
 
@@ -24,17 +25,17 @@ export default function Admin() {
   // ================= API CALLS =================
 
 const fetchStats = async () => {
-  const res = await axios.get("https://furniture-rental-project-dg9ur9tch.vercel.app/api/admin/stats");
+  const res = await axios.get(`${backendURL}/api/admin/stats`);
   setStats(res.data);
 };
 
 const fetchProducts = async () => {
-  const res = await axios.get("https://furniture-rental-project-dg9ur9tch.vercel.app/api/products");
+  const res = await axios.get(`${backendURL}/api/products`);
   setProducts(res.data);
 };
 
 const fetchBookings = async () => {
-  const res = await axios.get("https://furniture-rental-project-dg9ur9tch.vercel.app/api/admin/bookings");
+  const res = await axios.get(`${backendURL}/api/admin/bookings`);
   setBookings(res.data);
 };
 
@@ -46,7 +47,7 @@ const fetchBookings = async () => {
       return alert("All fields required");
     }
 
-    await axios.post("http://localhost:5000/api/products/add", {
+    await axios.post(`${backendURL}/api/products/add`, {
       name,
       category,
       rentPrice,
@@ -66,7 +67,7 @@ const fetchBookings = async () => {
   };
 
   const deleteProduct = async (id) => {
-    await axios.delete(`http://localhost:5000/api/products/${id}`);
+    await axios.delete(`${backendURL}/api/products/${id}`);
     fetchProducts();
     fetchStats();
   };
@@ -75,7 +76,7 @@ const fetchBookings = async () => {
 
   const updateBookingStatus = async (id, status) => {
 
-    await axios.put(`http://localhost:5000/api/admin/bookings/${id}`, {
+    await axios.put(`${backendURL}/api/admin/bookings/${id}`, {
       bookingStatus: status
     });
 
@@ -84,10 +85,10 @@ const fetchBookings = async () => {
   };
 
   const approveReturn = async (id) => { 
-    await axios.put(`http://localhost:5000/api/bookings/approve-return/${id}`); fetchBookings(); 
+    await axios.put(`${backendURL}/api/bookings/approve-return/${id}`); fetchBookings(); 
 }; 
   const completeBooking = async (id) => {
-     await axios.put(`http://localhost:5000/api/bookings/complete/${id}`); fetchBookings();
+     await axios.put(`${backendURL}/api/bookings/complete/${id}`); fetchBookings();
     };
 
   // ================= LOAD DATA =================

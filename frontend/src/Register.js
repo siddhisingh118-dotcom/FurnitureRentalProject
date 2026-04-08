@@ -3,7 +3,7 @@ import axios from "axios";
 import { Link } from "react-router-dom";
 
 function Register() {
-
+  const backendURL = process.env.REACT_APP_BACKEND_URL;
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
@@ -15,7 +15,7 @@ function Register() {
     try {
 
       await axios.post(
-        "http://furniture-rental-project-dg9ur9tch.vercel.app/api/auth/register",
+        `${backendURL}/api/auth/register`,
         {
           name,
           email,

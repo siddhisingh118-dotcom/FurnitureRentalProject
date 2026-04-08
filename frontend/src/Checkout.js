@@ -5,7 +5,7 @@ import axios from "axios";
 import { useNavigate } from "react-router-dom";
 
 function Checkout() {
-
+  const backendURL = process.env.REACT_APP_BACKEND_URL;
   const { cart } = useContext(CartContext);
   const { user } = useContext(AuthContext);
   const navigate = useNavigate();
@@ -50,7 +50,7 @@ function Checkout() {
         };
 
         await axios.post(
-          "https://furniture-rental-project-dg9ur9tch.vercel.app/api/bookings/add",
+          `${backendURL}/api/bookings/add`,
           bookingData
         );
 

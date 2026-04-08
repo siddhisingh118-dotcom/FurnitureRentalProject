@@ -3,13 +3,13 @@ import axios from "axios";
 import { Link } from "react-router-dom";
 
 function Bookings() {
-
+  const backendURL = process.env.REACT_APP_BACKEND_URL;
   const [bookings, setBookings] = useState([]);
   const [supportRequests, setSupportRequests] = useState([]);
 
   const fetchBookings = () => {
 
-    axios.get("https://furniture-rental-project-dg9ur9tch.vercel.app/api/bookings")
+    axios.get(`${backendURL}/api/bookings`)
       .then(res => {
         setBookings(res.data);
       })
@@ -26,7 +26,7 @@ function Bookings() {
 
   const fetchSupportRequests = () => {
 
-    axios.get("https://furniture-rental-project-dg9ur9tch.vercel.app/api/support")
+    axios.get(`${backendURL}/api/support`)
       .then(res => {
         setSupportRequests(res.data);
       })
@@ -36,7 +36,7 @@ function Bookings() {
 
   const updateDuration = (id, months) => {
 
-    axios.put(`https://furniture-rental-project-dg9ur9tch.vercel.app/api/bookings/update/${id}`, {
+    axios.put(`${backendURL}/api/bookings/update/${id}`, {
       rentalDuration: months
     })
       .then(() => {
@@ -53,7 +53,7 @@ function Bookings() {
 
     if (!message) return;
 
-    axios.post("https://furniture-rental-project-dg9ur9tch.vercel.app/api/support/add", {
+    axios.post(`${backendURL}/api/support/add`, {
       bookingId: booking._id,
       userName: booking.userName,
       productName: booking.productName,
@@ -73,7 +73,7 @@ function Bookings() {
 
     if (!date) return;
 
-    axios.put(`https://furniture-rental-project-dg9ur9tch.vercel.app/api/bookings/schedule-pickup/${booking._id}`, {
+    axios.put(`${backendURL}/api/bookings/schedule-pickup/${booking._id}`, {
       pickupDate: date
     })
       .then(() => {
@@ -86,7 +86,7 @@ function Bookings() {
 
   const requestReturn = (booking) => {
 
-  axios.put(`https://furniture-rental-project-dg9ur9tch.vercel.app/api/bookings/request-return/${booking._id}`)
+  axios.put(`${backendURL}/api/bookings/request-return/${booking._id}`)
     .then(() => {
       alert("Return requested!");
       fetchBookings();

@@ -5,6 +5,7 @@ import { useNavigate, useLocation } from "react-router-dom";
 import jsPDF from "jspdf";
 
 function Payment() {
+  const backendURL = process.env.REACT_APP_BACKEND_URL;
   const { cart, setCart } = useContext(CartContext);
   const [loading, setLoading] = useState(false);
   const [selectedMethod, setSelectedMethod] = useState(null);
@@ -127,7 +128,7 @@ function Payment() {
           selectedMethod === "COD" ? "Pending" : "Success";
 
         const res = await axios.post(
-          "http://furniture-rental-project-dg9ur9tch.vercel.app/api/orders",
+          `${backendURL}/api/orders`,
           {
             items: groupedItems,
             paymentMethod: selectedMethod,

@@ -3,14 +3,14 @@ import axios from "axios";
 import { useParams } from "react-router-dom";
 
 function ProductDetails() {
-
+  const backendURL = process.env.REACT_APP_BACKEND_URL;
   const { id } = useParams();
   const [product, setProduct] = useState(null);
   
 
 useEffect(() => {
   console.log("Product ID:", id);
-  axios.get(`https://furniture-rental-project-dg9ur9tch.vercel.app/api/products/${id}`)
+  axios.get(`${backendURL}/api/products/${id}`)
     .then(res => {
       console.log("Product data:", res.data);
       setProduct(res.data);
