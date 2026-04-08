@@ -19,10 +19,10 @@ function Bookings() {
 
   };
 
-  useEffect(() => {
-    fetchBookings();
-    fetchSupportRequests();
-  }, []);
+useEffect(() => {
+  fetchBookings();
+  fetchSupportRequests();
+}, [fetchBookings, fetchSupportRequests]);
 
   const fetchSupportRequests = () => {
 

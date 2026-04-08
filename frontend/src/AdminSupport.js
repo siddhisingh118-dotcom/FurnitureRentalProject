@@ -17,9 +17,9 @@ function AdminSupport() {
     }
   };
 
-  useEffect(() => {
-    fetchRequests();
-  }, []);
+useEffect(() => {
+  fetchRequests();
+}, [fetchRequests]);
 
   const updateStatus = async (id, status) => {
     try {

@@ -9,18 +9,10 @@ function ProductDetails() {
   
 
 useEffect(() => {
-  console.log("Product ID:", id);
   axios.get(`${backendURL}/api/products/${id}`)
-    .then(res => {
-      console.log("Product data:", res.data);
-      setProduct(res.data);
-    })
-    .catch(err => {
-      console.log(err);
-      setProduct("notfound");
-    });
-
-}, [id]);
+    .then(res => setProduct(res.data))
+    .catch(err => setProduct("notfound"));
+}, [id, backendURL]);
 
   if (product === null) {
     return <h2 style={{textAlign:"center"}}>Loading product...</h2>;

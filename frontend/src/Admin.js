@@ -93,13 +93,11 @@ const fetchBookings = async () => {
 
   // ================= LOAD DATA =================
 
-  useEffect(() => {
-
-    fetchStats();
-    fetchProducts();
-    fetchBookings();
-
-  }, []);
+ useEffect(() => {
+  fetchStats();
+  fetchProducts();
+  fetchBookings();
+}, [fetchStats, fetchProducts, fetchBookings]);
 
   // ================= UI STYLES =================
 

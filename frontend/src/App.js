@@ -24,11 +24,11 @@ function App() {
   const [likedItems, setLikedItems] = useState({});
 
 
-  useEffect(() => {
-    axios.get(`${backendURL}/api/products/`)
-      .then(res => setProducts(res.data))
-      .catch(err => console.log(err));
-  }, []);
+useEffect(() => {
+  axios.get(`${backendURL}/api/products/`)
+    .then(res => setProducts(res.data))
+    .catch(err => console.log(err));
+}, [backendURL]);
 
 const filteredProducts = products
   .filter(product =>

@@ -113,9 +113,9 @@ function AdminAnalytics() {
 
   };
 
-  useEffect(() => {
-    fetchBookings();
-  }, []);
+useEffect(() => {
+  fetchBookings();
+}, [fetchBookings]);
 
   const cardStyle = {
     width: "48%",
