@@ -14,7 +14,24 @@ const orderRoutes = require("./routes/orderRoutes");
 
 const app = express();
 
-app.use(cors());
+const allowedOrigins = [
+  "http://localhost:3000",
+  "https://furniture-rental-project-d4dcrep1b.vercel.app",
+  "https://furniture-rental-project-m05g9zdwe.vercel.app",
+  "https://furniture-rental-project.vercel.app", // stable production URL
+];
+
+app.use(cors({
+  origin: function (origin, callback) {
+    if (!origin || allowedOrigins.includes(origin)) {
+      callback(null, true);
+    } else {
+      callback(new Error("Not allowed by CORS"));
+    }
+  },
+  credentials: true
+}));
+
 app.use(express.json());
 
 app.use("/api/user", userRoutes);
