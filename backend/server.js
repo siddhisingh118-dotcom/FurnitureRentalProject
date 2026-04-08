@@ -28,12 +28,16 @@ app.use("/api/orders", orderRoutes);
 // MongoDB connection
 const uri = process.env.MONGO_URI;
 
-mongoose.connect(uri)
-  .then(() => console.log("MongoDB Connected"))
-  .catch(err => console.log(err));
+console.log("Attempting to connect to MongoDB..."); // Track progress
 
-app.get("/", (req, res) => {
-  res.send("Furniture Rental API is working");
-});
-
-app.listen(5000, () => console.log("Server running on port 5000"));
+mongoose.connect(uri, {
+  serverSelectionTimeoutMS: 5000, // Stop hanging after 5 seconds
+})
+  .then(() => {
+    console.log("✅ ✅ ✅ MongoDB Connected Successfully! ✅ ✅ ✅");
+  })
+  .catch(err => {
+    console.log("❌ ❌ ❌ MongoDB Connection Error: ❌ ❌ ❌");
+    console.error(err.message);
+    // This will tell us if it's a "Timeout", "Auth Failed", or "DNS" issue
+  });
