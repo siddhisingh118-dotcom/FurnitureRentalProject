@@ -6,6 +6,7 @@ import { useNavigate } from "react-router-dom";
 
 function Checkout() {
   const backendURL = process.env.REACT_APP_BACKEND_URL;
+  console.log("Backend URL:", backendURL);
   const { cart } = useContext(CartContext);
   const { user } = useContext(AuthContext);
   const navigate = useNavigate();
