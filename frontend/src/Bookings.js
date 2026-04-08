@@ -9,7 +9,7 @@ function Bookings() {
 
   const fetchBookings = () => {
 
-    axios.get("http://localhost:5000/api/bookings")
+    axios.get("https://furniture-rental-project-dg9ur9tch.vercel.app/api/bookings")
       .then(res => {
         setBookings(res.data);
       })
@@ -26,7 +26,7 @@ function Bookings() {
 
   const fetchSupportRequests = () => {
 
-    axios.get("http://localhost:5000/api/support")
+    axios.get("https://furniture-rental-project-dg9ur9tch.vercel.app/api/support")
       .then(res => {
         setSupportRequests(res.data);
       })
@@ -36,7 +36,7 @@ function Bookings() {
 
   const updateDuration = (id, months) => {
 
-    axios.put(`http://localhost:5000/api/bookings/update/${id}`, {
+    axios.put(`https://furniture-rental-project-dg9ur9tch.vercel.app/api/bookings/update/${id}`, {
       rentalDuration: months
     })
       .then(() => {
@@ -53,7 +53,7 @@ function Bookings() {
 
     if (!message) return;
 
-    axios.post("http://localhost:5000/api/support/add", {
+    axios.post("https://furniture-rental-project-dg9ur9tch.vercel.app/api/support/add", {
       bookingId: booking._id,
       userName: booking.userName,
       productName: booking.productName,
@@ -73,7 +73,7 @@ function Bookings() {
 
     if (!date) return;
 
-    axios.put(`http://localhost:5000/api/bookings/schedule-pickup/${booking._id}`, {
+    axios.put(`https://furniture-rental-project-dg9ur9tch.vercel.app/api/bookings/schedule-pickup/${booking._id}`, {
       pickupDate: date
     })
       .then(() => {
@@ -86,7 +86,7 @@ function Bookings() {
 
   const requestReturn = (booking) => {
 
-  axios.put(`http://localhost:5000/api/bookings/request-return/${booking._id}`)
+  axios.put(`https://furniture-rental-project-dg9ur9tch.vercel.app/api/bookings/request-return/${booking._id}`)
     .then(() => {
       alert("Return requested!");
       fetchBookings();

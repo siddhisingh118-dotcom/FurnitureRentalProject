@@ -25,7 +25,7 @@ function App() {
 
 
   useEffect(() => {
-    axios.get("http://localhost:5000/api/products/")
+    axios.get("https://furniture-rental-project-dg9ur9tch.vercel.app/api/products/")
       .then(res => setProducts(res.data))
       .catch(err => console.log(err));
   }, []);

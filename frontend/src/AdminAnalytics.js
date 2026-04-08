@@ -36,7 +36,7 @@ function AdminAnalytics() {
 
     try {
 
-      const res = await axios.get("http://localhost:5000/api/bookings");
+      const res = await axios.get("https://furniture-rental-project-dg9ur9tch.vercel.app/api/admin/bookings");
       const bookings = res.data;
 
       // ================= TOP RENTED PRODUCTS =================

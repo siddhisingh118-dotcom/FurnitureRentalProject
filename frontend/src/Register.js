@@ -15,7 +15,7 @@ function Register() {
     try {
 
       await axios.post(
-        "http://localhost:5000/api/auth/register",
+        "http://furniture-rental-project-dg9ur9tch.vercel.app/api/auth/register",
         {
           name,
           email,

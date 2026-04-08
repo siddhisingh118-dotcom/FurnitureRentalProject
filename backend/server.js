@@ -31,7 +31,7 @@ const uri = process.env.MONGO_URI;
 console.log("Attempting to connect to MongoDB..."); // Track progress
 
 mongoose.connect(uri, {
-  serverSelectionTimeoutMS: 5000, // Stop hanging after 5 seconds
+  serverSelectionTimeoutMS: 5000,
 })
   .then(() => {
     console.log("✅ ✅ ✅ MongoDB Connected Successfully! ✅ ✅ ✅");
@@ -39,5 +39,4 @@ mongoose.connect(uri, {
   .catch(err => {
     console.log("❌ ❌ ❌ MongoDB Connection Error: ❌ ❌ ❌");
     console.error(err.message);
-    // This will tell us if it's a "Timeout", "Auth Failed", or "DNS" issue
   });

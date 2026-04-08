@@ -127,7 +127,7 @@ function Payment() {
           selectedMethod === "COD" ? "Pending" : "Success";
 
         const res = await axios.post(
-          "http://localhost:5000/api/orders",
+          "http://furniture-rental-project-dg9ur9tch.vercel.app/api/orders",
           {
             items: groupedItems,
             paymentMethod: selectedMethod,

@@ -9,7 +9,7 @@ function SupportRequest({ booking }) {
 
     try {
 
-      await axios.post("http://localhost:5000/api/support/add", {
+      await axios.post("http://furniture-rental-project-dg9ur9tch.vercel.app/api/support/add", {
 
         userId: booking.userId,
         userName: booking.userName,

@@ -50,7 +50,7 @@ function Checkout() {
         };
 
         await axios.post(
-          "http://localhost:5000/api/bookings/add",
+          "https://furniture-rental-project-dg9ur9tch.vercel.app/api/bookings/add",
           bookingData
         );
 

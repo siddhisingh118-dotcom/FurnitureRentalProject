@@ -8,7 +8,7 @@ function AdminSupport() {
 
   const fetchRequests = async () => {
     try {
-      const res = await axios.get("http://localhost:5000/api/support");
+      const res = await axios.get("https://furniture-rental-project-dg9ur9tch.vercel.app/api/support");
       setRequests(res.data || []);
     } catch (err) {
       console.error("Error fetching support requests:", err);
@@ -22,7 +22,7 @@ function AdminSupport() {
 
   const updateStatus = async (id, status) => {
     try {
-      await axios.put(`http://localhost:5000/api/support/${id}`, {
+      await axios.put(`https://furniture-rental-project-dg9ur9tch.vercel.app/api/support/${id}`, {
         requestStatus: status
       });
       fetchRequests();
@@ -35,7 +35,7 @@ function AdminSupport() {
   const sendReply = async (id) => {
     try {
 
-      await axios.put(`http://localhost:5000/api/support/reply/${id}`, {
+      await axios.put(`https://furniture-rental-project-dg9ur9tch.vercel.app/api/support/reply/${id}`, {
         adminReply: replyText[id]
       });
 

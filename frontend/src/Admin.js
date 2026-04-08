@@ -23,20 +23,20 @@ export default function Admin() {
 
   // ================= API CALLS =================
 
-  const fetchStats = async () => {
-    const res = await axios.get("http://localhost:5000/api/admin/stats");
-    setStats(res.data);
-  };
+const fetchStats = async () => {
+  const res = await axios.get("https://furniture-rental-project-dg9ur9tch.vercel.app/api/admin/stats");
+  setStats(res.data);
+};
 
-  const fetchProducts = async () => {
-    const res = await axios.get("http://localhost:5000/api/products");
-    setProducts(res.data);
-  };
+const fetchProducts = async () => {
+  const res = await axios.get("https://furniture-rental-project-dg9ur9tch.vercel.app/api/products");
+  setProducts(res.data);
+};
 
-  const fetchBookings = async () => {
-    const res = await axios.get("http://localhost:5000/api/admin/bookings");
-    setBookings(res.data);
-  };
+const fetchBookings = async () => {
+  const res = await axios.get("https://furniture-rental-project-dg9ur9tch.vercel.app/api/admin/bookings");
+  setBookings(res.data);
+};
 
   // ================= PRODUCT FUNCTIONS =================
 

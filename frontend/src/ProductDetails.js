@@ -10,7 +10,7 @@ function ProductDetails() {
 
 useEffect(() => {
   console.log("Product ID:", id);
-  axios.get(`http://localhost:5000/api/products/${id}`)
+  axios.get(`https://furniture-rental-project-dg9ur9tch.vercel.app/api/products/${id}`)
     .then(res => {
       console.log("Product data:", res.data);
       setProduct(res.data);

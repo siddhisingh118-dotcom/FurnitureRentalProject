@@ -7,7 +7,7 @@ function Dashboard(){
 
  useEffect(()=>{
 
-   axios.get("http://localhost:5000/api/bookings")
+axios.get("https://furniture-rental-project-dg9ur9tch.vercel.app/api/bookings")
    .then(res=>{
      setBookings(res.data);
    });
