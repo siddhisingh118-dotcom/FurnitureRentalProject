@@ -11,15 +11,12 @@ const adminRoutes = require("./routes/admin");
 const supportRoutes = require("./routes/supportRoutes");
 const orderRoutes = require("./routes/orderRoutes");
 
-
 const app = express();
 
 app.use(cors({
   origin: true,
   credentials: true
 }));
-
-app.use(express.json());
 
 app.use(express.json());
 
@@ -35,12 +32,6 @@ app.get("/", (req, res) => {
   res.send("API is running...");
 });
 
-const PORT = process.env.PORT || 5000;
-
-app.listen(PORT, () => {
-  console.log(`Server running on port ${PORT}`);
-});
-
 // MongoDB connection
 const uri = process.env.MONGO_URI;
 
@@ -49,16 +40,15 @@ console.log("Attempting to connect to MongoDB...");
 mongoose.connect(uri, {
   serverSelectionTimeoutMS: 5000,
 })
-  .then(() => {
-    console.log("✅ MongoDB Connected Successfully!");
+.then(() => {
+  console.log("✅ MongoDB Connected Successfully!");
 
-    const PORT = process.env.PORT || 5000;
-    app.listen(PORT, () => {
-      console.log(`Server running on port ${PORT}`);
-    });
-
-  })
-  .catch(err => {
-    console.log("❌ MongoDB Connection Error:");
-    console.error(err.message);
+  const PORT = process.env.PORT || 5000;
+  app.listen(PORT, () => {
+    console.log(`Server running on port ${PORT}`);
   });
+})
+.catch(err => {
+  console.log("❌ MongoDB Connection Error:");
+  console.error(err.message);
+});
