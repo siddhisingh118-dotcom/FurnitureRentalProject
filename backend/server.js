@@ -2,7 +2,6 @@ require("dotenv").config();
 const express = require("express");
 const mongoose = require("mongoose");
 const cors = require("cors");
-const path = require("path");
 
 const app = express();
 
@@ -11,9 +10,7 @@ app.use(express.json());
 
 // CORS setup for frontend
 app.use(cors({
-  origin: [
-    process.env.FRONTEND_URL || "http://localhost:5000"
-  ],
+  origin: process.env.FRONTEND_URL || "http://localhost:3000",
   methods: ["GET", "POST", "PUT", "DELETE"],
   credentials: true
 }));
@@ -34,16 +31,6 @@ app.use("/api/bookings", bookingRoutes);
 app.use("/api/admin", adminRoutes);
 app.use("/api/support", supportRoutes);
 app.use("/api/orders", orderRoutes);
-
-// ===== Serve Frontend in Production =====
-if (process.env.NODE_ENV === "production") {
-  const clientBuildPath = path.join(__dirname, "client/build");
-  app.use(express.static(clientBuildPath));
-
-  app.get(/^\/.*$/, (req, res) => {
-    res.sendFile(path.join(clientBuildPath, "index.html"));
-  });
-}
 
 // ===== Error handling middleware =====
 app.use((err, req, res, next) => {
