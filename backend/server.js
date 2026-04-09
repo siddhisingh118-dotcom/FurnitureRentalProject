@@ -8,8 +8,12 @@ const app = express();
 
 // ===== Middleware =====
 app.use(express.json());
+
+// CORS setup for frontend
 app.use(cors({
-  origin: process.env.FRONTEND_URL || "https://your-frontend-project.vercel.app", // set your frontend URL in .env for production
+  origin: [
+    process.env.FRONTEND_URL || "http://localhost:5000"
+  ],
   methods: ["GET", "POST", "PUT", "DELETE"],
   credentials: true
 }));
@@ -36,7 +40,6 @@ if (process.env.NODE_ENV === "production") {
   const clientBuildPath = path.join(__dirname, "client/build");
   app.use(express.static(clientBuildPath));
 
-  // Catch-all route compatible with Node 22+
   app.get(/^\/.*$/, (req, res) => {
     res.sendFile(path.join(clientBuildPath, "index.html"));
   });
@@ -52,5 +55,10 @@ app.use((err, req, res, next) => {
 const PORT = process.env.PORT || 5000;
 
 mongoose.connect(process.env.MONGO_URL)
-  .then(() => console.log("✅ MongoDB connected successfully"))
+  .then(() => {
+    console.log("✅ MongoDB connected successfully");
+    app.listen(PORT, () => {
+      console.log(`🚀 Server is running on port ${PORT}`);
+    });
+  })
   .catch(err => console.error("❌ MongoDB connection error:", err));
