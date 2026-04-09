@@ -4,7 +4,7 @@ import { Link, useNavigate } from "react-router-dom";
 import { AuthContext } from "./AuthContext";
 
 function Login() {
- const backendURL = process.env.REACT_APP_BACKEND_URL;
+ const backendURL = process.env.REACT_APP_BACKEND_URL || "https://furniturerentalproject.onrender.com";
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
 
@@ -40,10 +40,9 @@ function Login() {
       }
 
     } catch (error) {
-
-      alert("Invalid login credentials");
-
-    }
+  console.log("LOGIN ERROR:", error.response?.data);
+  alert(error.response?.data?.message || "Login failed");
+}
 
   };
 
