@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 import axios from "axios";
 
 function AdminSupport() {
-  const backendURL = process.env.REACT_APP_BACKEND_URL;
+  const backendURL = "https://furniturerentalproject.onrender.com";
 
   const [requests, setRequests] = useState([]);
   const [replyText, setReplyText] = useState({});

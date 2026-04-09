@@ -2,7 +2,7 @@ import React, {useEffect, useState} from "react";
 import axios from "axios";
 
 function Dashboard(){
- const backendURL = process.env.REACT_APP_BACKEND_URL;
+ const backendURL = "https://furniturerentalproject.onrender.com";
  const [bookings, setBookings] = useState([]);
 
  useEffect(()=>{

@@ -3,7 +3,7 @@ import { CartContext } from "./CartContext";
 import { Link, useNavigate } from "react-router-dom";
 
 function Cart() {
-
+  
   const { cart, setCart, removeFromCart } = useContext(CartContext);
   const navigate = useNavigate();
 

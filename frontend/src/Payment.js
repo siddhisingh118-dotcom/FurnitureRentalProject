@@ -5,7 +5,7 @@ import { useNavigate, useLocation } from "react-router-dom";
 import jsPDF from "jspdf";
 
 function Payment() {
-  const backendURL = process.env.REACT_APP_BACKEND_URL;
+  const backendURL = "https://furniturerentalproject.onrender.com";
   const { cart, setCart } = useContext(CartContext);
   const [loading, setLoading] = useState(false);
   const [selectedMethod, setSelectedMethod] = useState(null);
