@@ -55,15 +55,21 @@ app.listen(PORT, () => {
 // MongoDB connection
 const uri = process.env.MONGO_URI;
 
-console.log("Attempting to connect to MongoDB..."); // Track progress
+console.log("Attempting to connect to MongoDB...");
 
 mongoose.connect(uri, {
   serverSelectionTimeoutMS: 5000,
 })
   .then(() => {
-    console.log("✅ ✅ ✅ MongoDB Connected Successfully! ✅ ✅ ✅");
+    console.log("✅ MongoDB Connected Successfully!");
+
+    const PORT = process.env.PORT || 5000;
+    app.listen(PORT, () => {
+      console.log(`Server running on port ${PORT}`);
+    });
+
   })
   .catch(err => {
-    console.log("❌ ❌ ❌ MongoDB Connection Error: ❌ ❌ ❌");
+    console.log("❌ MongoDB Connection Error:");
     console.error(err.message);
   });
