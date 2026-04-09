@@ -9,7 +9,7 @@ const app = express();
 // ===== Middleware =====
 app.use(express.json());
 app.use(cors({
-  origin: "https://your-frontend-project.vercel.app",
+  origin: process.env.FRONTEND_URL || "https://your-frontend-project.vercel.app", // set your frontend URL in .env for production
   methods: ["GET", "POST", "PUT", "DELETE"],
   credentials: true
 }));
@@ -31,7 +31,24 @@ app.use("/api/admin", adminRoutes);
 app.use("/api/support", supportRoutes);
 app.use("/api/orders", orderRoutes);
 
-// ===== MongoDB Connection =====
+// ===== Serve Frontend in Production =====
+if (process.env.NODE_ENV === "production") {
+  const clientBuildPath = path.join(__dirname, "client/build");
+  app.use(express.static(clientBuildPath));
+
+  // Catch-all route compatible with Node 22+
+  app.get(/^\/.*$/, (req, res) => {
+    res.sendFile(path.join(clientBuildPath, "index.html"));
+  });
+}
+
+// ===== Error handling middleware =====
+app.use((err, req, res, next) => {
+  console.error(err.stack);
+  res.status(500).json({ message: err.message || "Something went wrong" });
+});
+
+// ===== MongoDB Connection & Server Start =====
 const PORT = process.env.PORT || 5000;
 
 mongoose.connect(process.env.MONGO_URL, {
@@ -43,14 +60,3 @@ mongoose.connect(process.env.MONGO_URL, {
   app.listen(PORT, () => console.log(`🚀 Server running on port ${PORT}`));
 })
 .catch(err => console.error("❌ MongoDB connection error:", err));
-
-// ===== Serve Frontend in Production =====
-if (process.env.NODE_ENV === "production") {
-  const clientBuildPath = path.join(__dirname, "client/build");
-  app.use(express.static(clientBuildPath));
-
-  // Regex-based catch-all route compatible with Node 22+
-  app.get(/^\/.*$/, (req, res) => {
-    res.sendFile(path.join(clientBuildPath, "index.html"));
-  });
-}
