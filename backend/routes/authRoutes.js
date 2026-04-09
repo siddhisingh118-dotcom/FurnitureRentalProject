@@ -5,7 +5,7 @@ const User = require("../models/User");
 
 const router = express.Router();
 
-const SECRET = "mysecretkey";
+const SECRET = process.env.JWT_SECRET || "fallbacksecret";
 
 
 // REGISTER
@@ -55,7 +55,7 @@ router.post("/login", async (req, res) => {
       return res.status(400).json({ message: "Invalid password" });
     }
 
-    const token = jwt.sign({ id: user._id }, SECRET);
+    const token = jwt.sign({ id: user._id }, SECRET, { expiresIn: "7d" });
 
     res.json({
       token,
