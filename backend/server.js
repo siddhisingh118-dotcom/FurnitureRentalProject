@@ -6,15 +6,15 @@ const path = require("path");
 
 const app = express();
 
-// Middleware
+// ===== Middleware =====
 app.use(express.json());
 app.use(cors({
-  origin: process.env.FRONTEND_URL || "*", // set your frontend URL in .env for production
+  origin: "https://your-frontend-project.vercel.app",
   methods: ["GET", "POST", "PUT", "DELETE"],
   credentials: true
 }));
 
-// Routes
+// ===== Routes =====
 const authRoutes = require("./routes/authRoutes");
 const userRoutes = require("./routes/userRoutes");
 const productRoutes = require("./routes/productRoutes");
@@ -31,28 +31,26 @@ app.use("/api/admin", adminRoutes);
 app.use("/api/support", supportRoutes);
 app.use("/api/orders", orderRoutes);
 
-// Serve frontend in production
-if (process.env.NODE_ENV === "production") {
-  app.use(express.static(path.join(__dirname, "client/build")));
-  app.get("*", (req, res) => {
-    res.sendFile(path.join(__dirname, "client/build", "index.html"));
-  });
-}
-
-// Error handling middleware
-app.use((err, req, res, next) => {
-  console.error(err.stack);
-  res.status(500).json({ message: err.message || "Something went wrong" });
-});
-
-// MongoDB connection & server start
+// ===== MongoDB Connection =====
 const PORT = process.env.PORT || 5000;
 
 mongoose.connect(process.env.MONGO_URL, {
   useNewUrlParser: true,
   useUnifiedTopology: true
 })
-.then(() => console.log("✅ MongoDB connected successfully"))
+.then(() => {
+  console.log("✅ MongoDB connected successfully");
+  app.listen(PORT, () => console.log(`🚀 Server running on port ${PORT}`));
+})
 .catch(err => console.error("❌ MongoDB connection error:", err));
 
-app.listen(PORT, () => console.log(`🚀 Server running on port ${PORT}`));
+// ===== Serve Frontend in Production =====
+if (process.env.NODE_ENV === "production") {
+  const clientBuildPath = path.join(__dirname, "client/build");
+  app.use(express.static(clientBuildPath));
+
+  // Regex-based catch-all route compatible with Node 22+
+  app.get(/^\/.*$/, (req, res) => {
+    res.sendFile(path.join(clientBuildPath, "index.html"));
+  });
+}
