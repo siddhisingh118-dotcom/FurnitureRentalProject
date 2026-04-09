@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import axios from "axios";
 
 function SupportRequest({ booking }) {
-  const backendURL = "https://furniturerentalproject.onrender.com";
+  const backendURL = process.env.REACT_APP_BACKEND_URL;
   const [issue, setIssue] = useState("");
 
   const submitRequest = async () => {

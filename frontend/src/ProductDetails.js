@@ -3,7 +3,7 @@ import axios from "axios";
 import { useParams } from "react-router-dom";
 
 function ProductDetails() {
-  const backendURL ="https://furniturerentalproject.onrender.com";
+  const backendURL = process.env.REACT_APP_BACKEND_URL;
   const { id } = useParams();
   const [product, setProduct] = useState(null);
   

@@ -16,7 +16,7 @@ import Admin from "./Admin";
 import AdminSupport from "./AdminSupport";
 import Payment from "./Payment";
 function App() {
-  const backendURL = "https://furniturerentalproject.onrender.com";
+  const backendURL = process.env.REACT_APP_BACKEND_URL;
   const [products, setProducts] = useState([]);
   const [selectedCategory, setSelectedCategory] = useState("all");
   const [search, setSearch] = useState("");

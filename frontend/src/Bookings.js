@@ -3,7 +3,7 @@ import axios from "axios";
 import { Link } from "react-router-dom";
 
 function Bookings() {
-  const backendURL = "https://furniturerentalproject.onrender.com";
+  const backendURL = process.env.REACT_APP_BACKEND_URL;
   const [bookings, setBookings] = useState([]);
   const [supportRequests, setSupportRequests] = useState([]);
 

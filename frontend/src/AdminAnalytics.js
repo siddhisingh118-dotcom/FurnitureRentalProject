@@ -27,7 +27,7 @@ ChartJS.register(
 );
 
 function AdminAnalytics() {
-  const backendURL = "https://furniturerentalproject.onrender.com";
+  const backendURL = process.env.REACT_APP_BACKEND_URL;
 
   const [chartData, setChartData] = useState({});
   const [categoryData, setCategoryData] = useState({});

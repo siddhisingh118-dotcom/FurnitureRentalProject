@@ -4,7 +4,7 @@ import { Link, useNavigate } from "react-router-dom";
 import { AuthContext } from "./AuthContext";
 
 function Login() {
-  const backendURL = "https://furniturerentalproject.onrender.com";
+ const backendURL = process.env.REACT_APP_BACKEND_URL;
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
 

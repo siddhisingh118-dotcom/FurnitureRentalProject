@@ -4,7 +4,7 @@ import AdminSupport from "./AdminSupport";
 import AdminAnalytics from "./AdminAnalytics";
 
 export default function Admin() {
-  const backendURL = "https://furniturerentalproject.onrender.com";
+  const backendURL = process.env.REACT_APP_BACKEND_URL;
 
   const [tab, setTab] = useState("dashboard");
 
